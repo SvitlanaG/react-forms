@@ -1,4 +1,5 @@
 import { RefObject, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ValidationError } from 'yup';
 import Navigation from '../components/Navigation';
 import { countries } from '../utils/constants/countries';
@@ -18,6 +19,7 @@ interface UserFormRefs {
 
 export default function UncontrolledFormPage() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const navigate = useNavigate();
 
     const user: UserFormRefs = {
         name: useRef<HTMLInputElement>(null),
@@ -45,6 +47,7 @@ export default function UncontrolledFormPage() {
                 }
             }
         });
+        setTimeout(() => navigate('/'), 200);
     };
 
     const createProfile = async () => {

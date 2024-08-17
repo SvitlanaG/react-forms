@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navigation.scss';
 
 export default function Navigation() {
@@ -9,13 +9,34 @@ export default function Navigation() {
                 <nav>
                     <ul>
                         <li>
-                            <Link to={`/`}>Home</Link>
+                            <NavLink
+                                to={`/`}
+                                className={({ isActive }) =>
+                                    isActive ? 'active' : 'inactive'
+                                }
+                            >
+                                Home
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={`/uncontrolled-form`}>Uncontrolled Form</Link>
+                            <NavLink
+                                to={`/uncontrolled-form`}
+                                className={({ isActive }) =>
+                                    isActive ? 'active' : 'inactive'
+                                }
+                            >
+                                Uncontrolled Form
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={`/react-hook-form`}>React Hook Form</Link>
+                            <NavLink
+                                to={`/react-hook-form`}
+                                className={({ isActive }) =>
+                                    isActive ? 'active' : 'inactive'
+                                }
+                            >
+                                React Hook Form
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>

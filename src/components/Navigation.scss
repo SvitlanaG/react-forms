@@ -24,7 +24,7 @@
             margin: 0;
             padding: 0;
             display: flex;
-            gap: 1rem; // space between links
+            gap: 1rem;
 
             li {
                 a {
@@ -38,6 +38,9 @@
                     &:hover {
                         background-color: $link-hover-color;
                     }
+                }
+                .active {
+                    background-color: $link-hover-color;
                 }
             }
         }

@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Resolver, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import { FormData } from '../interfaces/FormData';
 import { countries } from '../utils/constants/countries';
@@ -16,9 +17,12 @@ export default function ReactHookFormPage() {
         resolver: yupResolver(userSchema) as Resolver<FormData>,
     });
 
+    const navigate = useNavigate();
+
     const createProfile = (data: FormData) => {
         alert(JSON.stringify(data, null, 2));
         reset();
+        setTimeout(() => navigate('/'), 200);
     };
 
     return (
