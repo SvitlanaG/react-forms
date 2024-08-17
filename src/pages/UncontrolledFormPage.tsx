@@ -1,6 +1,7 @@
 import { RefObject, useRef, useState } from 'react';
 import { ValidationError } from 'yup';
 import Navigation from '../components/Navigation';
+import { countries } from '../utils/constants/countries';
 import { userSchema } from '../utils/validations/UserValidation';
 
 interface UserFormRefs {
@@ -156,10 +157,11 @@ export default function UncontrolledFormPage() {
                             required
                         />
                         <datalist id="countries">
-                            <option value="Ukraine" />
-                            <option value="Germany" />
-                            <option value="United Kingdom" />
-                            <option value="Australia" />
+                            {countries.map((country) => (
+                                <option key={country} value={country}>
+                                    {country}
+                                </option>
+                            ))}
                         </datalist>
                         {errors.country && <span>{errors.country}</span>}
                     </div>
