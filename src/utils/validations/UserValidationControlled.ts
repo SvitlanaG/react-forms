@@ -35,14 +35,14 @@ export const userSchema = yup.object().shape({
         .oneOf([true], 'You must accept the terms and conditions')
         .required(),
     picture: yup
-        .mixed()
+        .mixed<FileList>()
         .test('fileSize', 'File size too large', (value) => {
-            if (!value) return true;
-            return (value as File).size <= 4 * 1024 * 1024;
+            if (!value || value.length === 0) return true;
+            return value[0].size <= 4 * 1024 * 1024;
         })
         .test('fileType', 'Unsupported file format', (value) => {
-            if (!value) return true;
-            return ['image/jpeg', 'image/png'].includes((value as File).type);
+            if (!value || value.length === 0) return true;
+            return ['image/jpeg', 'image/png'].includes(value[0].type);
         }),
     country: yup.string().required(),
 });

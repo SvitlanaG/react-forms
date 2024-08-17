@@ -31,6 +31,22 @@ export default function UncontrolledFormPage() {
         country: useRef<HTMLInputElement>(null),
     };
 
+    const resetForm = () => {
+        Object.values(user).forEach((ref) => {
+            if (ref.current) {
+                if (ref.current instanceof HTMLInputElement) {
+                    if (ref.current.type === 'checkbox') {
+                        ref.current.checked = false;
+                    } else {
+                        ref.current.value = '';
+                    }
+                } else if (ref.current instanceof HTMLSelectElement) {
+                    ref.current.selectedIndex = 0;
+                }
+            }
+        });
+    };
+
     const createProfile = async () => {
         if (
             user.name.current &&
@@ -68,6 +84,7 @@ export default function UncontrolledFormPage() {
                     Picture Uploaded: ${userData.picture}
                     Country: ${userData.country}
                 `);
+                resetForm();
             } catch (validationErrors) {
                 if (validationErrors instanceof ValidationError) {
                     const errorMessages: { [key: string]: string } = {};
