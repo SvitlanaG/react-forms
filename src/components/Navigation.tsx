@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import './Navigation.scss';
 
 export default function Navigation() {
     return (
         <>
-            <div>
+            <div className="nav">
                 <h1>React forms</h1>
                 <nav>
                     <ul>

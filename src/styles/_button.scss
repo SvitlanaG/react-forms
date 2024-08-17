@@ -1,0 +1,41 @@
+@import './colors.scss';
+button {
+    border-radius: 8px;
+    border: 1px solid $primary-color;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: $button-bg-color;
+    color: $button-text-color;
+    cursor: pointer;
+    transition:
+        background-color 0.3s,
+        border-color 0.25s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background-color: $button-hover-border-color;
+        border-color: $button-hover-border-color;
+        color: $text-color;
+    }
+
+    &:focus,
+    &:focus-visible {
+        outline: 4px auto -webkit-focus-ring-color;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    button {
+        background-color: $button-light-bg-color;
+        color: $primary-color;
+    }
+
+    button:hover {
+        background-color: $primary-color;
+        border-color: $primary-color;
+    }
+}

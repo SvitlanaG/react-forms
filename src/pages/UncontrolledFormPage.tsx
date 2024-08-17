@@ -101,9 +101,9 @@ export default function UncontrolledFormPage() {
     return (
         <>
             <Navigation />
-            <div>
-                <h1>Uncontrolled Form Page</h1>
-                <h2>Personal Information</h2>
+            <div className="form-container">
+                <h2>Uncontrolled Form Page</h2>
+                <h3>Personal Information</h3>
                 <span>Fields marked with * are required.</span>
                 <form>
                     <div>

@@ -24,14 +24,15 @@ export default function ReactHookFormPage() {
     return (
         <>
             <Navigation />
-            <div>
-                <h1>React Hook Form Page</h1>
-                <h2>Personal Information</h2>
+            <div className="form-container">
+                <h2>React Hook Form Page</h2>
+                <h3>Personal Information</h3>
                 <span>Fields marked with * are required.</span>
                 <form onSubmit={handleSubmit(createProfile)}>
                     <div>
                         <label htmlFor="name">Name*:</label>
                         <input
+                            type="text"
                             id="name"
                             {...register('name', {
                                 required: true,
