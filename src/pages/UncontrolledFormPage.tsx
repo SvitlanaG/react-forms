@@ -6,7 +6,7 @@ import Navigation from '../components/Navigation';
 import { addUser } from '../store/user/userSlice';
 import { countries } from '../utils/constants/countries';
 import { fileToBase64 } from '../utils/formUtils';
-import { userSchema } from '../utils/validations/UserValidation';
+import { getUserSchema } from '../utils/validations/UserValidation';
 
 interface UserFormRefs {
     name: RefObject<HTMLInputElement>;
@@ -22,6 +22,7 @@ interface UserFormRefs {
 
 export default function UncontrolledFormPage() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const userSchema = getUserSchema(countries);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

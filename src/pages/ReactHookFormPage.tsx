@@ -1,15 +1,17 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Resolver, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import { FormData } from '../interfaces/FormData';
+import { RootState } from '../store/store';
 import { addUser } from '../store/user/userSlice';
-import { countries } from '../utils/constants/countries';
 import { fileToBase64 } from '../utils/formUtils';
-import { userSchema } from '../utils/validations/UserValidationControlled';
+import { getUserSchema } from '../utils/validations/UserValidationControlled';
 
 export default function ReactHookFormPage() {
+    const countries = useSelector((state: RootState) => state.countries);
+    const userSchema = getUserSchema(countries);
     const {
         register,
         formState: { errors, isValid },
