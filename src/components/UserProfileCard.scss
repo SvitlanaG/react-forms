@@ -8,9 +8,12 @@
     align-items: center;
     width: 100%;
     border: 1px solid $primary-color;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     padding: 1rem 2rem;
     background-color: $button-light-bg-color;
+    transition:
+        border 0.3s ease,
+        background-color 0.3s ease;
     margin-bottom: 1rem;
 
     h3 {
@@ -33,6 +36,10 @@
         max-width: 14rem;
         height: auto;
         border-radius: 50%;
+    }
+
+    &-highlight {
+        background-color: #efcffa;
     }
 }
 

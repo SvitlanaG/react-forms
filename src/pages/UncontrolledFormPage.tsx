@@ -99,7 +99,7 @@ export default function UncontrolledFormPage() {
                 dispatch(addUser(userData));
 
                 resetForm();
-                setTimeout(() => navigate('/'), 200);
+                setTimeout(() => navigate('/', { state: { newUser: true } }), 200);
             } catch (validationErrors) {
                 if (validationErrors instanceof ValidationError) {
                     const errorMessages: { [key: string]: string } = {};

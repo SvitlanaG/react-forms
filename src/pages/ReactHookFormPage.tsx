@@ -43,7 +43,7 @@ export default function ReactHookFormPage() {
         };
         dispatch(addUser(userData));
         reset();
-        setTimeout(() => navigate('/'), 200);
+        setTimeout(() => navigate('/', { state: { newUser: true } }), 200);
     };
 
     return (

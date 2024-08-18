@@ -1,6 +1,10 @@
 import { UserProfile } from '../store/user/userSlice';
 import './UserProfileCard.scss';
 
+interface UserProfileCardProps extends UserProfile {
+    isHighlighted?: boolean;
+}
+
 export default function UserProfileCard({
     name,
     age,
@@ -10,9 +14,10 @@ export default function UserProfileCard({
     terms,
     picture,
     country,
-}: UserProfile) {
+    isHighlighted,
+}: UserProfileCardProps) {
     return (
-        <div className="user-profile-card">
+        <div className={`user-profile-card ${isHighlighted ? 'user-profile-card-highlight' : ''}`}>
             <div>
                 <h3>User Profile</h3>
                 <p>
