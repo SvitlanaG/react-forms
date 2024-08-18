@@ -124,17 +124,17 @@ export default function UncontrolledFormPage() {
                     <div>
                         <label htmlFor="name">Name*:</label>
                         <input type="text" id="name" ref={user.name} required />
-                        {errors.name && <span>{errors.name}</span>}
+                        <span className="error-message">{errors.name}</span>
                     </div>
                     <div>
                         <label htmlFor="age">Age*:</label>
                         <input type="number" id="age" ref={user.age} required />
-                        {errors.age && <span>{errors.age}</span>}
+                        <span className="error-message">{errors.age}</span>
                     </div>
                     <div>
                         <label htmlFor="email">Email*:</label>
                         <input type="email" id="email" ref={user.email} required />
-                        {errors.email && <span>{errors.email}</span>}
+                        <span className="error-message">{errors.email}</span>
                     </div>
                     <div>
                         <label htmlFor="password">Password*:</label>
@@ -144,7 +144,7 @@ export default function UncontrolledFormPage() {
                             ref={user.password}
                             required
                         />
-                        {errors.password && <span>{errors.password}</span>}
+                        <span className="error-message">{errors.password}</span>
                     </div>
                     <div>
                         <label htmlFor="confirmPassword">Confirm Password*:</label>
@@ -154,9 +154,9 @@ export default function UncontrolledFormPage() {
                             ref={user.confirmPassword}
                             required
                         />
-                        {errors.confirmPassword && (
-                            <span>{errors.confirmPassword}</span>
-                        )}
+                        <span className="error-message">
+                            {errors.confirmPassword}
+                        </span>
                     </div>
                     <div>
                         <label htmlFor="gender">Gender*:</label>
@@ -165,19 +165,19 @@ export default function UncontrolledFormPage() {
                             <option value="female">Female</option>
                             <option value="diverse">Diverse</option>
                         </select>
-                        {errors.gender && <span>{errors.gender}</span>}
+                        <span className="error-message">{errors.gender}</span>
                     </div>
                     <div>
                         <label>
                             <input type="checkbox" ref={user.terms} required />{' '}
                             Accept Terms and Conditions *
                         </label>
-                        {errors.terms && <span>{errors.terms}</span>}
+                        <span className="error-message">{errors.terms}</span>
                     </div>
                     <div>
                         <label htmlFor="picture">Upload Picture:</label>
                         <input type="file" id="picture" ref={user.picture} />
-                        {errors.picture && <span>{errors.picture}</span>}
+                        <span className="error-message">{errors.picture}</span>
                     </div>
                     <div>
                         <label htmlFor="country">Country*:</label>
@@ -195,7 +195,7 @@ export default function UncontrolledFormPage() {
                                 </option>
                             ))}
                         </datalist>
-                        {errors.country && <span>{errors.country}</span>}
+                        <span className="error-message">{errors.country}</span>
                     </div>
                     <button type="button" onClick={createUserProfile}>
                         Create Profile

@@ -12,7 +12,7 @@ import { userSchema } from '../utils/validations/UserValidationControlled';
 export default function ReactHookFormPage() {
     const {
         register,
-        formState: { errors },
+        formState: { errors, isValid },
         handleSubmit,
         reset,
     } = useForm<FormData>({
@@ -63,7 +63,9 @@ export default function ReactHookFormPage() {
                                 required: true,
                             })}
                         />
-                        {errors.name && <span>{errors.name.message}</span>}
+                        <span className="error-message">
+                            {errors.name && errors.name.message}
+                        </span>
                     </div>
 
                     <div>
@@ -75,7 +77,9 @@ export default function ReactHookFormPage() {
                                 required: true,
                             })}
                         />
-                        {errors.age && <span>{errors.age.message}</span>}
+                        <span className="error-message">
+                            {errors.age && errors.age.message}
+                        </span>
                     </div>
 
                     <div>
@@ -87,7 +91,9 @@ export default function ReactHookFormPage() {
                                 required: true,
                             })}
                         />
-                        {errors.email && <span>{errors.email.message}</span>}
+                        <span className="error-message">
+                            {errors.email && errors.email.message}
+                        </span>
                     </div>
 
                     <div>
@@ -99,7 +105,9 @@ export default function ReactHookFormPage() {
                                 required: true,
                             })}
                         />
-                        {errors.password && <span>{errors.password.message}</span>}
+                        <span className="error-message">
+                            {errors.password && errors.password.message}
+                        </span>
                     </div>
 
                     <div>
@@ -111,9 +119,10 @@ export default function ReactHookFormPage() {
                                 required: true,
                             })}
                         />
-                        {errors.confirmPassword && (
-                            <span>{errors.confirmPassword.message}</span>
-                        )}
+                        <span className="error-message">
+                            {errors.confirmPassword &&
+                                errors.confirmPassword.message}
+                        </span>
                     </div>
 
                     <div>
@@ -123,7 +132,9 @@ export default function ReactHookFormPage() {
                             <option value="female">Female</option>
                             <option value="diverse">Diverse</option>
                         </select>
-                        {errors.gender && <span>{errors.gender.message}</span>}
+                        <span className="error-message">
+                            {errors.gender && errors.gender.message}
+                        </span>
                     </div>
 
                     <div>
@@ -136,13 +147,17 @@ export default function ReactHookFormPage() {
                             />{' '}
                             Accept Terms and Conditions *
                         </label>
-                        {errors.terms && <span>{errors.terms.message}</span>}
+                        <span className="error-message">
+                            {errors.terms && errors.terms.message}
+                        </span>
                     </div>
 
                     <div>
                         <label htmlFor="picture">Upload Picture:</label>
                         <input type="file" id="picture" {...register('picture')} />
-                        {errors.picture && <span>{errors.picture.message}</span>}
+                        <span className="error-message">
+                            {errors.picture && errors.picture.message}
+                        </span>
                     </div>
 
                     <div>
@@ -162,9 +177,13 @@ export default function ReactHookFormPage() {
                                 </option>
                             ))}
                         </datalist>
-                        {errors.country && <span>{errors.country.message}</span>}
+                        <span className="error-message">
+                            {errors.country && errors.country.message}
+                        </span>
                     </div>
-                    <button type="submit">Create Profile</button>
+                    <button type="submit" disabled={!isValid}>
+                        Create Profile
+                    </button>
                 </form>
             </div>
         </>

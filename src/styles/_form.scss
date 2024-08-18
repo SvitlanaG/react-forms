@@ -22,7 +22,6 @@
 
 form {
     display: grid;
-    gap: 1rem;
 }
 
 label {
@@ -68,6 +67,10 @@ span {
     color: $error-color;
     font-size: 0.875rem;
     margin-top: 0.25rem;
+}
+
+.error-message {
+    min-height: 1.5rem;
 }
 
 .file-upload {

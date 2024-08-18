@@ -26,6 +26,12 @@ button {
     &:focus-visible {
         outline: 4px auto -webkit-focus-ring-color;
     }
+    &:disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+        user-select: none;
+        color: #888;
+    }
 }
 
 @media (prefers-color-scheme: light) {
