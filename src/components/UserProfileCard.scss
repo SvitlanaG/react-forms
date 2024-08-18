@@ -1,0 +1,51 @@
+@import '../index.scss';
+
+.user-profile-card {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    gap: 2rem;
+    align-items: center;
+    width: 100%;
+    border: 1px solid $primary-color;
+    border-radius: 0.5rem;
+    padding: 1rem 2rem;
+    background-color: $button-light-bg-color;
+    transition:
+        border 0.3s ease,
+        background-color 0.3s ease;
+    margin-bottom: 1rem;
+
+    h3 {
+        margin-bottom: 16px;
+        color: $primary-color;
+    }
+
+    p {
+        margin: 8px 0;
+        color: $secondary-color;
+
+        strong {
+            color: #222;
+        }
+    }
+
+    .user-profile-picture {
+        display: block;
+        margin-top: 12px;
+        max-width: 14rem;
+        height: auto;
+        border-radius: 50%;
+    }
+
+    &-highlight {
+        background-color: #efcffa;
+    }
+}
+
+@media (max-width: 780px) {
+    .user-profile-card {
+        flex-direction: column;
+        padding: 1rem;
+    }
+}
