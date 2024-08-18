@@ -27,13 +27,19 @@ export default function HomePage() {
             <div>
                 <h2>Home Page</h2>
             </div>
-            {users.map((user, index) => (
-                <UserProfileCard
-                    key={index}
-                    {...user}
-                    isHighlighted={index === highlightIndex}
-                />
-            ))}
+            {users.length === 0 ? (
+                <span>
+                    No user data available at the moment. Please add a new user.
+                </span>
+            ) : (
+                users.map((user, index) => (
+                    <UserProfileCard
+                        key={index}
+                        {...user}
+                        isHighlighted={index === highlightIndex}
+                    />
+                ))
+            )}
         </>
     );
 }

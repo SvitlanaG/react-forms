@@ -40,6 +40,13 @@ h1 {
     line-height: 1.1;
 }
 
+h2 {
+    font-size: 2rem;
+    color: $primary-color;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;
