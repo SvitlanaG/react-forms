@@ -1,9 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Resolver, useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import { FormData } from '../interfaces/FormData';
+import { addUser } from '../store/user/userSlice';
 import { countries } from '../utils/constants/countries';
+import { fileToBase64 } from '../utils/formUtils';
 import { userSchema } from '../utils/validations/UserValidationControlled';
 
 export default function ReactHookFormPage() {
@@ -16,11 +19,29 @@ export default function ReactHookFormPage() {
         mode: 'onChange',
         resolver: yupResolver(userSchema) as Resolver<FormData>,
     });
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const createProfile = (data: FormData) => {
-        alert(JSON.stringify(data, null, 2));
+    const createUserProfile = async (data: FormData) => {
+        const pictureFile = data.picture?.[0];
+        let base64Picture: string | undefined = undefined;
+
+        if (pictureFile) {
+            base64Picture = await fileToBase64(pictureFile);
+        }
+        const userData = {
+            ...data,
+            name: data.name,
+            age: data.age,
+            email: data.email,
+            password: data.password,
+            confirmPassword: data.confirmPassword,
+            gender: data.gender,
+            terms: data.terms,
+            picture: base64Picture,
+            country: data.country,
+        };
+        dispatch(addUser(userData));
         reset();
         setTimeout(() => navigate('/'), 200);
     };
@@ -32,7 +53,7 @@ export default function ReactHookFormPage() {
                 <h2>React Hook Form Page</h2>
                 <h3>Personal Information</h3>
                 <span>Fields marked with * are required.</span>
-                <form onSubmit={handleSubmit(createProfile)}>
+                <form onSubmit={handleSubmit(createUserProfile)}>
                     <div>
                         <label htmlFor="name">Name*:</label>
                         <input
@@ -143,9 +164,7 @@ export default function ReactHookFormPage() {
                         </datalist>
                         {errors.country && <span>{errors.country.message}</span>}
                     </div>
-                    <button type="button" onClick={handleSubmit(createProfile)}>
-                        Create Profile
-                    </button>
+                    <button type="submit">Create Profile</button>
                 </form>
             </div>
         </>

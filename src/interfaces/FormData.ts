@@ -6,6 +6,6 @@ export interface FormData {
     confirmPassword: string;
     gender: 'male' | 'female' | 'diverse';
     terms: boolean;
-    picture: FileList;
+    picture: FileList | null;
     country: string;
 }

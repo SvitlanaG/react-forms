@@ -1,8 +1,11 @@
 import { RefObject, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ValidationError } from 'yup';
 import Navigation from '../components/Navigation';
+import { addUser } from '../store/user/userSlice';
 import { countries } from '../utils/constants/countries';
+import { fileToBase64 } from '../utils/formUtils';
 import { userSchema } from '../utils/validations/UserValidation';
 
 interface UserFormRefs {
@@ -19,6 +22,7 @@ interface UserFormRefs {
 
 export default function UncontrolledFormPage() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const user: UserFormRefs = {
@@ -47,10 +51,9 @@ export default function UncontrolledFormPage() {
                 }
             }
         });
-        setTimeout(() => navigate('/'), 200);
     };
 
-    const createProfile = async () => {
+    const createUserProfile = async () => {
         if (
             user.name.current &&
             user.age.current &&
@@ -62,32 +65,41 @@ export default function UncontrolledFormPage() {
             user.picture.current &&
             user.country.current
         ) {
-            const userData = {
+            const pictureFile = user.picture.current.files?.[0];
+            let base64Picture: string | undefined = undefined;
+
+            if (pictureFile) {
+                base64Picture = await fileToBase64(pictureFile);
+            }
+            const testData = {
                 name: user.name.current.value,
-                age: user.age.current.value,
+                age: Number(user.age.current.value),
                 email: user.email.current.value,
                 password: user.password.current.value,
                 confirmPassword: user.confirmPassword.current.value,
-                gender: user.gender.current.value,
+                gender: user.gender.current.value as 'male' | 'female' | 'diverse',
                 terms: user.terms.current.checked,
                 picture: user.picture.current.files?.[0],
                 country: user.country.current.value,
             };
+            const userData = {
+                name: user.name.current.value,
+                age: Number(user.age.current.value),
+                email: user.email.current.value,
+                password: user.password.current.value,
+                confirmPassword: user.confirmPassword.current.value,
+                gender: user.gender.current.value as 'male' | 'female' | 'diverse',
+                terms: user.terms.current.checked,
+                picture: base64Picture,
+                country: user.country.current.value,
+            };
             try {
-                await userSchema.validate(userData, { abortEarly: false });
+                await userSchema.validate(testData, { abortEarly: false });
                 setErrors({});
-                alert(`
-                    Name: ${userData.name}
-                    Age: ${userData.age}
-                    Email: ${userData.email}
-                    Password: ${userData.password}
-                    Confirm Password: ${userData.confirmPassword}
-                    Gender: ${userData.gender}
-                    Terms Accepted: ${userData.terms ? 'Yes' : 'No'}
-                    Picture Uploaded: ${userData.picture}
-                    Country: ${userData.country}
-                `);
+                dispatch(addUser(userData));
+
                 resetForm();
+                setTimeout(() => navigate('/'), 200);
             } catch (validationErrors) {
                 if (validationErrors instanceof ValidationError) {
                     const errorMessages: { [key: string]: string } = {};
@@ -185,7 +197,7 @@ export default function UncontrolledFormPage() {
                         </datalist>
                         {errors.country && <span>{errors.country}</span>}
                     </div>
-                    <button type="button" onClick={createProfile}>
+                    <button type="button" onClick={createUserProfile}>
                         Create Profile
                     </button>
                 </form>
